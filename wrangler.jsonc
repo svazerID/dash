@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dash",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Lets a bare `npx wrangler deploy` build the Next.js app with OpenNext first.
+  "build": {
+    "command": "npx opennextjs-cloudflare build"
+  },
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "dash"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
