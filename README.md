@@ -20,10 +20,13 @@ pnpm preview    # build OpenNext + jalankan di workerd lokal
 ## Deploy ke Cloudflare Workers
 
 ```bash
+pnpm build           # opennextjs-cloudflare build → .open-next/
 npx wrangler login   # sekali saja, atau set CLOUDFLARE_API_TOKEN
 npx wrangler deploy
 ```
 
-`wrangler.jsonc` berisi `build.command` (`opennextjs-cloudflare build`), jadi `npx wrangler deploy` otomatis mem-build aplikasi Next.js sebelum upload. Di Workers Builds (dashboard Cloudflare), deploy command cukup `npx wrangler deploy`.
+Atau sekaligus: `pnpm run deploy`.
+
+Workers Builds (dashboard Cloudflare): build command `pnpm run build`, deploy command `npx wrangler deploy`. Script `build` menjalankan build OpenNext; `next build` biasa ada di `pnpm build:next`.
 
 > `cacheComponents` sengaja dimatikan di `next.config.ts`: dengan opsi itu request hang di runtime Workers.
